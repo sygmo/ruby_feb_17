@@ -59,3 +59,4 @@ puts x
 
 # Useful methods:
 # .reduce
+# .times
