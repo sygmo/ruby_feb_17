@@ -4,7 +4,6 @@
 # puts h.fetch("a")                          
 # puts h.fetch("z", "Not found!")                 
 
-
 # delete
 # puts; print "*" * 50; puts
 # arr = [10,20,30,40]
