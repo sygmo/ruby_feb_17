@@ -12,9 +12,3 @@ class Human
 		end
 	end
 end
-
-flint = Human.new
-vane = Human.new
-flint.attack(vane)
-puts flint.health
-puts vane.health
