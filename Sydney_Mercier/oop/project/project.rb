@@ -1,11 +1,15 @@
 class Project
-	attr_accessor :name, :description
+	attr_accessor :name, :description, :team_member
 	def initialize(name, description)
 		@name = name
 		@description = description
+		@team_member = 0
 	end
 	def elevator_pitch
-		puts "#{@name}, #{@description}"
+		"#{@name}, #{@description}"
+	end
+	def add_to_team
+		@team_member += 1
 	end
 end
 
