@@ -66,14 +66,5 @@ class BankAccount
 	end
 end
 
-mine = BankAccount.new(500, 25)
-mine.account_information
-mine.deposit("401k", 300)
-mine.withdraw("checking", 200)
-p mine.get_checking
-p mine.get_savings
-mine.get_total_money
-yours = BankAccount.new(1000, 3025)
-
 
 
