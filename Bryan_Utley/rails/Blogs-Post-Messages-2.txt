@@ -1,0 +1,142 @@
+rails new blogspostmessages-2
+cd blogspostmessages-2
+{edit gemfile ->  change 'bcrypt' to 'bcrypt-ruby', and add 'hirb'}
+bundle install
+
+rails g model Blog name:string description:text
+rails g model Post title:string content:text user:references blog:references
+rails g model Message author:string message:text post:references user:references
+rails g model User first_name:string last_name:string email_address:string
+rails g model owner user:references blog:references
+
+class Blog < ApplicationRecord
+  
+	has_many :owners
+	has_many :posts, :dependent => :destroy
+  
+	has_many :users, through: :owners
+
+  
+	validates :name, :description, presence: true
+
+end
+
+class Message < ApplicationRecord
+  
+	belongs_to :post
+  
+	belongs_to :user
+
+  
+	validates  :author,  presence: true
+	
+	validates  :message, presence: true, length: { minimum: 15 }
+
+end
+
+class Post < ApplicationRecord
+  
+	belongs_to :blog
+  
+	belongs_to :user
+  
+	has_many :messages
+
+  
+	validates  :content, presence: true
+	
+	validates  :title, presence: true, length: { minimum: 7 }
+
+end
+
+class User < ApplicationRecord
+  
+	has_many :messages
+  
+	has_many :posts
+
+	has_many :owners
+	has_many :blogs, through: :owners
+
+end
+
+class Owner < ApplicationRecord
+  
+	belongs_to :user
+  
+	belongs_to :blog
+
+end
+
+
+rake db:migrate
+
+5.times { User.create(first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, email_address: Faker::Internet.safe_email)}
+
+User.first.blogs.create(name: "First Blog", description: "It's the first blog")
+User.first.blogs.create(name: "Second Blog", description: "It's the second blog")
+User.first.blogs.create(name: "Third Blog", description: "It's the third blog")
+User.find(2).blogs.create(name: "First Blog, User 2", description: "It's the first blog for user 2")
+User.last.blogs.create(name: "First Blog, User 3", description: "It's the first blog for user 3")
+
+Owner.update_all(user_id: 3)
+
+Post.create(user: User.first, blog: Blog.find(2), title: "First Post", content: "This is the second blog")
+Post.create(user: User.first, blog: Blog.find(2), title: "Second Post", content: "This is the second blog")
+Post.create(user: User.first, blog: Blog.find(2), title: "Third Post", content: "This is the second blog")
+
+Post.create(user: User.second, blog: Blog.last, title: "First Post", content: "This is the last blog")
+Post.create(user: User.second, blog: Blog.last, title: "Second Post", content: "This is the last blog")
+Post.create(user: User.second, blog: Blog.last, title: "Third Post", content: "This is the last blog")
+Post.create(user: User.second, blog: Blog.last, title: "Fourth Post", content: "This is the last blog")
+Post.create(user: User.second, blog: Blog.last, title: "Fifth Post", content: "This is the last blog")
+
+Post.create(user: User.third, blog: Blog.first, title: "First Post", content: "This is the first blog, but third user")
+Post.create(user: User.third, blog: Blog.find(2), title: "First Post", content: "This is the second blog, but third user")
+Post.create(user: User.third, blog: Blog.find(3), title: "First Post", content: "This is the third blog, but third user")
+
+#10: Have the 3rd user create 2 messages for the first post created and 3 messages for the second post created
+Message.create(user: User.third, post: Post.first, author: "Bryan Utley", message: "Crappy Post if ever there was one.")
+Message.create(user: User.third, post: Post.first, author: "Bryan Utley", message: "Yet another wonderfully crappy Post.")
+Message.create(user: User.third, post: Post.second, author: "Bryan Utley", message: "Crap...Crap...Crap")
+Message.create(user: User.third, post: Post.second, author: "Bryan Utley", message: "Ughhh, I thought it was Friday already!")
+Message.create(user: User.third, post: Post.second, author: "Bryan Utley", message: "Ooooh boy, someone needs to repeat first-grade for the 4th time.")
+
+#11: Have the 4th user create 3 messages for the last post you created.
+Message.create(user: User.fourth, post: Post.last, author: "Cindy Rojas", message: "This is message #1")
+Message.create(user: User.fourth, post: Post.last, author: "Cindy Rojas", message: "This is message #2")
+Message.create(user: User.fourth, post: Post.last, author: "Cindy Rojas", message: "This is message #3")
+
+#12: Change the owner of the 2nd post to the last user.
+Post.second.update(user:User.last)
+
+#13: Change the 2nd post's content to be something else.
+Post.second.update(content:"I can't beleive this is only #13")
+
+#14: Retrieve all blogs owned by the 3rd user (make this work by simply doing: User.find(3).blogs).
+User.find(3).blogs
+
+#15: Retrieve all posts that were created by the 3rd user
+User.find(3).posts
+
+#16: Retrieve all messages left by the 3rd user
+User.find(3).messages
+
+#17: Retrieve all posts associated with the first blog as well as who left these posts.
+Post.joins(:user).where(blog: Blog.first).select("*")
+
+#18 Retrieve all messages associated with the first blog along with all the user information of those who left the messages.
+
+
+#19 Grab all user information of those that own the first blog (make this work by allowing Blog.first.owners to work).
+Blog.first.owners.joins(:user).select("*")
+
+#20 Change it so that the first blog is no longer owned by the first user.
+Owner.where(user: User.first).where(blog: Blog.first).destroy_all
+
+
+
+
+
+
+

@@ -1,0 +1,82 @@
+rails new blogspostmessages-1
+cd blogspostmessages-1
+{edit gemfile ->  change 'bcrypt' to 'bcrypt-ruby', and add 'hirb'}
+bundle install
+
+rails g model Blog name:string description:text
+rake db:migrate
+rails g model Post title:string content:text blog:references
+rake db:migrate
+rails g model Messages author:string message:text post:references
+rake db:migrate
+
+class Blog < ApplicationRecord
+
+	has_many   :post, :dependent => :destroy
+	validates  :name, :description, presence: true
+end
+
+
+class Post < ApplicationRecord
+  
+	has_many   :message, :dependent => :destroy
+	belongs_to :blog
+
+	validates  :content, presence: true
+  
+	validates  :title, presence: true, length: { minimum: 7 }
+
+end
+
+
+class Message < ApplicationRecord
+  
+	belongs_to :post
+
+	validates  :author,  presence: true
+  
+	validates  :message, presence: true, length: { minimum: 15 }
+
+end
+
+
+Blog.create(name:"Cats", description:"Are they really a good pet?")
+Blog.create(name:"Dogs", description:"Man's Best Friend")
+Blog.create(name:"Gold Fish", description:"Memory better than an Elephant? Say what???")
+Blog.create(name:"Cars", description:"Red is so pretty")
+Blog.create(name:"Programming", description:"Will your eyes and back ever recover?")
+
+Blog.find(1).post.create(title:"Litter Boxes", content:"I can't stand the smell, cat's gotta go and now.")
+Blog.find(1).post.create(title:"Hair Balls", content:"Nothing better than being woken up at 3:00am with your cat throwing up a hair ball.")
+Blog.find(1).post.create(title:"Scratching", content:"No furniture is safe with a cat around")
+
+Blog.find(2).post.create(title:"Man's Best Friend", content:"She's always waiting at the front door, and exicted to see you.")
+Blog.find(2).post.create(title:"Carpet or Hard Wood Floor", content:"Why do they always seek out the one room in the house with carpet")
+
+Blog.find(3).post.create(title:"Small or large Bowl", content:"I hear they have 5 second memory, so go for the small bowl.")
+Blog.find(3).post.create(title:"Rocks or gravel", content:"Use gravel in the bottom of the bowl")
+
+Blog.find(4).post.create(title:"Z06 or ZR1", content:"If you have the means, go for the ZR1")Blog.
+Blog.find(4).post.create(title:"ZR1 Red or Black", content:"Red or Black is cooler.  Simple answer: Red")
+
+Blog.find(5).post.create(title:"Javascript", content:"This is the king of web programming languages")
+Blog.find(5).post.create(title:"F# is that a musical Note?", content:"This is on the same list of dead languages like SandScript")
+
+
+Post.first.message.create(author:"Bryan Utley", message:"These are my comments on Cats")
+Post.first.message.create(author:"Bryan Utley", message:"Cats want to look like a mini-lion but just don't pull it off")
+Post.first.message.create(author:"Cindy Rojas", message:"I love Cats, and they love me.")
+
+Blog.last.post.order('created_at DESC')
+
+Post.first.update(title:"Litter Boxes are for Cats Only!")
+
+Post.third.destroy
+
+Blog.all
+
+Blog.where("id < ?",5)
+
+
+
+
