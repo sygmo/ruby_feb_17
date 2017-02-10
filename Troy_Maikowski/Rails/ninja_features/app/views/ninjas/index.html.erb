@@ -1,0 +1,22 @@
+<form action='/process_data' method='post'>
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+  <br>
+  <br>
+  <div>
+    Ninja Name*: <input type="text" name="name">
+
+    <% if flash[:notice] and flash[:notice]["name"] %>
+    <p><%= flash[:notice]["name"].join(", ") %></p>
+    <% end %>
+
+  </div>
+  <br>
+  <div>
+    Ninja Description*: <input type="text" name="description">
+    <% if flash[:notice] and flash[:notice]["description"] %>
+    <p><%= flash[:notice]["description"].join(", ") %></p>
+    <% end %>
+  </div>
+  <br>
+  <input type="submit" value="Create">
+</form>

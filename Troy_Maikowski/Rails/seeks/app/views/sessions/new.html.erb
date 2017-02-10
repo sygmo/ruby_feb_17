@@ -1,0 +1,10 @@
+<% if flash[:notice] %>
+  <span><%= flash[:notice] %></span>
+<% end %>
+<form action='/login' method="POST">
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+  <br><br>
+  <div>Email: <input type="text" name="Email"></div><br>
+  <div>Password: <input type="password" name="Password"></div><br>
+  <div><input type="submit" value="Log In"></div>
+</form>
