@@ -1,0 +1,8 @@
+<h3>Random Word (attempt #<%= session['count'] %>)</h3>
+<div>
+  <h1><%= session['word'] %></h1>
+</div>
+<form action="/process_word/" method="POST">
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+  <input type="submit" value="Generate">
+</form>
