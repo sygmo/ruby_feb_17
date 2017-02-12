@@ -1,0 +1,98 @@
+rails new dojo_ninjas
+cd dojo_ninjas
+bundle install
+
+rails g model Dojo name:string city:string state:string
+rails g model Ninja first_name:string last_name:string dojo:references
+rake db:migrate
+
+Dojo.create(name:"CodingDojo Silicon Valley", city:"Mountain View", state:"CA")
+Dojo.create(name:"CodingDojo Seattle", city:"Seattle", state:"WA")
+Dojo.create(name:"CodingDojo New York", city:"New York", state:"NY")
+
+class Dojo < ApplicationRecord
+  
+	has_many  :ninja
+
+  
+	validates :name, :city, :state, presence: true
+  
+	validates :state, presence: true, length: { is: 2 }
+
+end
+class Ninja < ApplicationRecord
+  
+	belongs_to :dojo
+
+  
+	validates :first_name, :last_name, presence: true
+
+end
+
+
+Dojo.destroy_all
+
+d=Dojo.new
+d[:name]="CodingDojo Silicon Valley"
+d[:city]="Mountain View"
+d[:state]="CA"
+d.save
+
+d1=Dojo.new
+d1[:name]="CodingDojo Seattle"
+d1[:city]="Seattle"
+d1[:state]="WA"
+d1.save
+
+d2=Dojo.new
+d2[:name]="CodingDojo New York"
+d2[:city]="New York"
+d2[:state]="NY"
+d2.save
+
+d3=Dojo.new
+d3[:name]="CodingDojo Paradise"
+d3.save
+d3.errors
+
+Dojo.first.ninjas.create(first_name:"Bryan", last_name:"Utley")
+Dojo.first.ninjas.create(first_name:"Olivia", last_name:"Utley")
+Dojo.first.ninjas.create(first_name:"Cindy", last_name:"Rojas")
+
+Dojo.find(5).ninjas.create(first_name:"Tim", last_name:"Nicholson")
+Dojo.find(5).ninjas.create(first_name:"Mason", last_name:"Utley")
+Dojo.find(5).ninjas.create(first_name:"Ruby", last_name:"Utley")
+
+Dojo.last.ninjas.create(first_name:"Tim", last_name:"Nicholson")
+Dojo.last.ninjas.create(first_name:"Shannon", last_name:"Nicholson")
+Dojo.last.ninjas.create(first_name:"Wendy", last_name:"Bartlett")
+
+Dojo.first.ninjas
+Dojo.find(5).ninjas
+Dojo.last.ninjas
+
+Dojo.second.ninjas.order('created_at DESC').select('first_name')
+
+Dojo.second.delete
+
+class Dojo < ApplicationRecord
+  
+	has_many  :ninjas, :dependent => :destroy
+
+
+	validates :name, :city, :state, presence: true
+  
+	validates :state, presence: true, length: { is: 2 }
+
+end
+
+
+
+
+
+
+
+
+
+
+
