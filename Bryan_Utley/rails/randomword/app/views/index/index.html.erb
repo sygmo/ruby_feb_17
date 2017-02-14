@@ -1,0 +1,15 @@
+<div class="container">
+
+  <div class="header">
+    Random Word (attempt # <%= session[:count] %>)
+  </div>
+  <div class="randomword">
+    <%= session[:word] %>
+  </div>
+  <br>
+  <form class="" action="/generate/" method="post">
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+    <input type="submit" name="" value="Generate">
+  </form>
+
+</div>
