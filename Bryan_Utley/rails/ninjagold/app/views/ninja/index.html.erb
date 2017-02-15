@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="header">
+    <span>Your Gold: <span class="gold"><%= session['gold'] %></span></span>
+  </div>
+
+  <div class="location">
+    <h2>Farm</h2>
+    <h3>(earns 10-20 gold)</h3>
+    <form class="form1" action="/farm/" method="post">
+      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      <input class="button" type="submit" name="farm" value="Find Gold!">
+    </form>
+  </div>
+
+  <div class="location">
+    <h2>Cave</h2>
+    <h3>(earns 5-10 gold)</h3>
+    <form class="form1" action="/cave/" method="post">
+      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      <input class="button" type="submit" name="cave" value="Find Gold!">
+    </form>
+  </div>
+
+  <div class="location">
+    <h2>House</h2>
+    <h3>(earns 2-5 gold)</h3>
+    <form class="form1" action="/house/" method="post">
+      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      <input class="button" type="submit" name="house" value="Find Gold!">
+    </form>
+  </div>
+
+  <div class="location">
+    <h2>Casino</h2>
+    <h3>(earns/takes 0-50 gold)</h3>
+    <form class="form1" action="/casino/" method="post">
+      <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+      <input class="button" type="submit" name="casino" value="Find Gold!">
+    </form>
+  </div>
+  <div class="clear"><br></div>
+  <span class="act">Activities:</span>
+  <div id="activity">
+    <% if session['activity'] %>
+      <% session['activity'].each do |act| %>
+        <p class="<%= act['class'] %>"><%= act['act'] %></p>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>
