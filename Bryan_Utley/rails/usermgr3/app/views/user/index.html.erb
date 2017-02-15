@@ -1,0 +1,44 @@
+<h1>Listing Users</h1>
+
+<% if flash[:message] %>
+  <div class="message">
+    <h2><%= flash[:message] %></h2>
+  </div>
+<% end %>
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.first_name %></td>
+        <td><%= user.first_name %></td>
+        <td><%= user.email_address %></td>
+        <td style="align: center">
+          <form class="inline" action="/users/<%= user.id %>" method="get">
+            <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+            <input class="fbutton" type="submit" name="show" value="Show">
+          </form>
+          <form class="inline" action="/users/<%= user.id %>/edit" method="get">
+            <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+            <input class="fbutton" type="submit" name="edit" value="Edit">
+          </form>
+          <form class="inline" action="/users/<%= user.id %>" method="post">
+            <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+            <input name="_method" type="hidden" value="delete">
+            <input class="fbutton" type="submit" name="edit" value="Delete">
+          </form>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br>
+<a class="button" href="/users/new/">New User</a>

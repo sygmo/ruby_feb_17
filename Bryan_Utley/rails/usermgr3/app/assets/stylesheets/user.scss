@@ -1,0 +1,33 @@
+.container {
+  width: 470px;
+  margin: 0 auto;
+}
+ul {
+  margin: 0;
+}
+li {
+  color: red;
+}
+.button, .fbutton {
+  border: 0;
+  background-color: green;
+  color: white;
+  font-weight: bold;
+  padding: 4px 7px;
+  text-decoration: none;
+  box-shadow: 2px 2px 2px black;
+}
+.fbutton {
+  padding: 2px 6px;
+  margin: 3px;
+}
+.inline {
+  display: inline;
+}
+.userlabel {
+  width: 120px;
+  display: inline-block;
+}
+span.userinfo {
+  font-weight: bold;
+}
