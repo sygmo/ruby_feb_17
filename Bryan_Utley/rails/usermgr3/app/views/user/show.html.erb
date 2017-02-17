@@ -1,0 +1,12 @@
+<h1>User Information</h1>
+
+<p><div class="userlabel">First Name:</div><span class="userinfo"><%= @user.first_name %></span></p>
+<p><div class="userlabel">Last Name:</div><span class="userinfo"><%= @user.last_name %></span></p>
+<p><div class="userlabel">Email Address:</div><span class="userinfo"><%= @user.email_address %></span></p>
+
+<form class="form1" action="/users/<%=@user.id%>/edit" method="get">
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+  <input class="button" type="submit" name="submit" value="Edit">
+</form>
+<br>
+<a href="/" class="button">Back</a>

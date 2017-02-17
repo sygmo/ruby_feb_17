@@ -1,0 +1,7 @@
+<h1>Edit Page</h1>
+
+<form action='/edit/'>
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+  <input type='text' name='name' value='<%= @user.name %>'/>
+  <input type="submit" value="Edit">
+</form>

@@ -1,0 +1,11 @@
+<% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+
+<h1>Result</h1>
+<p>Name: <%= session[:name] %></p>
+<p>Name: <%= session[:location] %></p>
+<p>Name: <%= session[:language] %></p>
+<p>Name: <%= session[:comment] %></p>
+
+<a href="/">Go Back</a>

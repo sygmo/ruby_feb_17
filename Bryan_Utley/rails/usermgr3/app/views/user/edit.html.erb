@@ -1,0 +1,50 @@
+<div class="container">
+  <h1>Editing User</h1>
+
+  <form class="form1" action="/users/<%= @user[:id] %>" method="post">
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+    <input name="_method" type="hidden" value="patch">
+
+    <label for="firstname">First Name<br>
+      <input type="text" name="user[first_name]" value="<%= @user[:first_name] %>">
+      <% if @errors %>
+        <ul><% @errors[:first_name].each do |err| %><li><%= err %></li><% end %></ul>
+      <% end %>
+    </label><br><br>
+
+    <label for="lastname">Last Name<br>
+      <input type="text" name="user[last_name]" value="<%= @user[:last_name] %>">
+      <% if @errors %>
+        <ul><% @errors[:last_name].each do |err| %><li><%= err %></li><% end %></ul>
+      <% end %>
+    </label><br><br>
+
+    <label for="email">Email Address<br>
+      <input type="text" name="user[email_address]" value="<%= @user[:email_address] %>">
+      <% if @errors %>
+        <ul><% @errors[:email_address].each do |err| %><li><%= err %></li><% end %></ul>
+      <% end %>
+    </label><br><br>
+
+    <label for="password">Password<br>
+      <input type="text" name="user[password]" value="<%= @user[:password] %>">
+      <% if @errors %>
+        <ul><% @errors[:password].each do |err| %><li><%= err %></li><% end %></ul>
+      <% end %>
+    </label><br><br>
+
+    <input class="button" type="submit" name="update" value="Update">
+
+  </form>
+
+  <br><br>
+
+  <form class="inline" action="/users/<%= @user[:id] %>" method="get">
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+    <input class="button" type="submit" name="show" value="Show">
+  </form>
+  <br><br>
+
+  <a class="button" href="/">Back</a>
+
+</div>

@@ -1,0 +1,44 @@
+<p>Your Gold: <%= session['gold'] %></p>
+
+<div>
+  <h3>Farm</h3>
+  <p>(earns 10-20 golds)</p>
+  <form action="/farm/" method="POST">
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+    <input type="submit" value="Find Gold!">
+  </form>
+</div>
+
+<div>
+  <h3>Cave</h3>
+  <p>(earns 5-10 golds)</p>
+  <form action="/cave/" method="POST">
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+    <input type="submit" value="Find Gold!">
+  </form>
+</div>
+
+<div>
+  <h3>House</h3>
+  <p>(earns 2-5 golds)</p>
+  <form action="/house/" method="POST">
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+    <input type="submit" value="Find Gold!">
+  </form>
+</div>
+
+<div>
+  <h3>Casino</h3>
+  <p>(earns/takes 0-50 golds)</p>
+  <form action="/casino/" method="POST">
+    <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+    <input type="submit" value="Find Gold!">
+  </form>
+</div>
+
+<h4>Activities</h4>
+<div>
+  <% session['activities'].each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>
+</div>
