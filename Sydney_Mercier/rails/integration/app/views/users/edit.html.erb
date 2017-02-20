@@ -1,0 +1,9 @@
+<h1>Users#edit</h1>
+<p>Find me in app/views/users/edit.html.erb</p>
+
+<form method="POST" action="/users/<%= @user.id %>">
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+	<input type="hidden" name="_method" value="PATCH">
+	Name: <input name="name" value="<%= @user.name %>"><br />
+	<input type="submit">
+</form>
