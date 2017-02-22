@@ -1,0 +1,11 @@
+<% if flash[:count] %>
+    <div class="count"><%= flash[:count] %></div>
+ <% end %>
+
+Submitted Information<br>
+<hr>
+Name: <%= params[:session][:name] %><br>
+Dojo Location: <%= params[:session][:location] %><br>
+Favorite Language: <%= params[:session][:language] %><br>
+Comment: <%= params[:session][:comment] %><br>
+<a href="/">Go Back</a>

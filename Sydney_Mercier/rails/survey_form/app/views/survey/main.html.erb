@@ -1,0 +1,11 @@
+<h1>Survey#main</h1>
+<p>Find me in app/views/survey/main.html.erb</p>
+
+<%= form_for :session, url: "/result" do |f| %>
+	Your Name: <%= f.text_field :name %><br>
+	Dojo Location: <%= f.select :location, ['Seattle', 'Dallas', 'Chicago']%><br>
+	Favorite Language: <%= f.select :language, ['Ruby', 'Python', 'Javascript']%><br>
+	Comment (optional): <%= f.text_field :comment %><br>
+	<%= f.submit "Submit" %>
+<% end %>
+
