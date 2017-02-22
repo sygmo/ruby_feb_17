@@ -1,0 +1,14 @@
+<h1>Index#main</h1>
+<p>Find me in app/views/index/main.html.erb</p>
+
+<a href="<%= new_dog %>"></a>
+
+<%= simple_form_for(@dog) do |f| %>
+<!-- 	<%= @dog.errors.full_messages do |msg| %>
+		<%= msg %><br>
+	<% end %> -->
+
+	<%= f.label :name %>
+	<%= f.text_field :name %>
+	<%= f.submit %>
+<% end %>
