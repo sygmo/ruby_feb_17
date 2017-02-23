@@ -6,7 +6,7 @@
 	<th>Last name</th>
 	<th>Email</th>
 </tr>
-	<% for user in @users %>
+	<% @users.each do |user| %>
 		<tr>
 			<td><%= user.first_name %></td>
 			<td><%= user.last_name %></td>
@@ -14,4 +14,6 @@
 		</tr>
 	<% end %>
 </table>
+
+<a href="/users/new">New User</a>
 
