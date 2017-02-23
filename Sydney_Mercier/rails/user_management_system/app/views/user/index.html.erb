@@ -1,0 +1,17 @@
+<h1>Listing users</h1>
+
+<table>
+<tr>
+	<th>First name</th>
+	<th>Last name</th>
+	<th>Email</th>
+</tr>
+	<% for user in @users %>
+		<tr>
+			<td><%= user.first_name %></td>
+			<td><%= user.last_name %></td>
+			<td><%= user.email_address %></td>
+		</tr>
+	<% end %>
+</table>
+
