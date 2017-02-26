@@ -1,0 +1,23 @@
+<h1>Editing user</h1>
+
+<% if @user.errors.any? %>
+	<div id="error_explanation">
+	  <h2><%= pluralize(@user.errors.count, "error") %></h2>
+	  <ul>
+	    <% @user.errors.full_messages.each do |msg| %>
+	    	<li><%= msg %></li>
+	    <% end %>
+	  </ul>
+	</div>
+<% end %>
+<form method="POST" action="/users/<%=@user.id%>">
+	<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+	<input type="hidden"name="_method"value="patch">
+	First name: <input name="first_name" value="<%=@user.first_name%>"><br />
+	Last name: <input name="last_name" value="<%=@user.last_name%>"><br />
+	Email: <input name="email_address" value="<%=@user.email_address%>"><br />
+	Password: <input name="password" value="<%=@user.password%>"><br />
+	<input type="submit" value="Update">
+</form>
+
+<a href="/users/<%=@user.id%>">Show</a> | <a href="/users">Back</a>

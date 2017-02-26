@@ -1,0 +1,27 @@
+<h2>Register</h2>
+<% if @user.errors.any? %>
+	<div id="error_explanation">
+	  <h2><%= pluralize(@user.errors.count, "error") %></h2>
+	  <ul>
+	    <% @user.errors.full_messages.each do |msg| %>
+	    	<li><%= msg %></li>
+	    <% end %>
+	  </ul>
+	</div>
+<% end %>
+<%= form_for @user, url: "/user" do |f| %>
+	First Name: <%= f.text_field :first_name %><br>
+	Last Name: <%= f.text_field :last_name %><br>
+	Email: <%= f.text_field :email %><br>
+	Password <%= f.password_field :password %><br>
+	<%= f.submit "Register" %>
+<% end %>
+
+<hr>
+
+<h2>Login</h2>
+<%= form_for :user, url: "/login" do |f| %>
+	Email: <%= f.text_field :email %><br>
+	Password <%= f.password_field :password %><br>
+	<%= f.submit "Login" %>
+<% end %>

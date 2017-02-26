@@ -16,4 +16,27 @@ class UserController < ApplicationController
   	user.save
   	redirect_to '/users'
   end
+
+  def show
+    @user = User.find_by(id: params[:id])
+  end
+
+  def edit
+    @user = User.find_by(id: params[:id])
+  end
+
+  def update
+    user = User.find_by(id: params[:id])
+    user.first_name = params[:first_name]
+    user.last_name = params[:last_name]
+    user.email_address = params[:email_address]
+    user.password = params[:password]
+    user.save
+    redirect_to '/users'
+  end
+
+  def delete
+    User.delete(params[:id])
+    redirect_to '/users'
+  end
 end

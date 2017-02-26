@@ -1,0 +1,45 @@
+<a href="/main">Log Out</a><br>
+
+Hello, <%= @user.first_name %> <%= @user.last_name %>!<br>
+
+All the songs in our hub:
+
+<table>
+<tr>
+	<th>Artist</th>
+	<th>Title</th>
+	<th>No. of Times Song Has Been Added</th>
+	<th>Add to Playlist</th>
+</tr>
+<% @songs.each do |s| %>
+	<tr>
+		<td><%= s.artist %></td>
+		<td><a href="/song/<%=s.id%>"><%= s.title %></a></td>
+		<td><%= s.add_count %></td>
+		<td><form method="POST" action="/song/<%= s.id %>">
+				<input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+				<input type="hidden" name="_method" value="PATCH">
+				<input type="submit" value="Add">
+			</form></td>
+	</tr>
+<% end %>
+</table>
+
+Add a Song:
+
+<% if @song.errors.any? %>
+	<div id="error_explanation">
+	  <h2><%= pluralize(@song.errors.count, "error") %></h2>
+	  <ul>
+	    <% @song.errors.full_messages.each do |msg| %>
+	    	<li><%= msg %></li>
+	    <% end %>
+	  </ul>
+	</div>
+<% end %>
+<%= form_for @song, url: "/song" do |f| %>
+	Title: <%= f.text_field :title %><br>
+	Artist: <%= f.text_field :artist %><br>
+	<%= f.submit "Add Song" %>
+<% end %>
+

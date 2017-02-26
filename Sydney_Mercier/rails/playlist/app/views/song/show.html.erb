@@ -1,0 +1,17 @@
+<a href="/songs">Dashboard</a><br>
+<a href="/main">Log Out</a><br>
+
+Others who added <%= @song.title %><br>
+
+<table>
+<tr>
+	<th>Name</th>
+	<th>Times Added</th>
+</tr>
+<% @lists.each do |list| %>
+	<tr>
+		<td><%= User.find(list.user_id).first_name %> <%= User.find(list.user_id).last_name %></td>
+		<td><%= list.times_added %></td>
+	</tr>
+<% end %>
+</table>
